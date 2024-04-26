@@ -1,0 +1,51 @@
+
+application{
+  config {
+    baseName DroidCoffee,
+    packageName rocks.zipcode,
+    applicationType monolith,
+    prodDatabaseType postgresql,
+  }
+  entities *
+}
+
+
+entity UserProfile {
+
+  firstName String,
+  lastName String,
+  email String,
+  dob Integer,
+  address String,
+  zipcode String,
+  phoneNumber Long,
+  
+}
+
+entity UsageBehavior {
+  
+  age Integer,
+  address String,
+  zipCode String,
+}
+
+entity Function {
+  
+  vibrationIntensity Integer,
+  hapticPattern String,
+  images Blob,
+  coffeeDescription String,
+}
+
+
+relationship ManyToOne {
+  UsageBehavior to Function,
+}
+
+relationship OneToMany {
+  UserProfile to UsageBehavior,
+}
+
+relationship ManyToMany {
+  Function{users} to UserProfile{functions},
+}
